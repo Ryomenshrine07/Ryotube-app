@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // export const BASE_URL = "http://localhost:8080";
-export const BASE_URL = "http://ryotube-application-env.eba-erah6sxf.eu-north-1.elasticbeanstalk.com";
+export const BASE_URL = "http://youtube-clone-env.eba-jwhga2kf.eu-north-1.elasticbeanstalk.com";
 
 export const myAxios = axios.create({
     baseURL:BASE_URL

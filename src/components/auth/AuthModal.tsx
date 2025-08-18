@@ -13,7 +13,7 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import { UserData } from '../../Commons/userData';
-import { getUserFromToken, loginIn, signUp } from '../../services/requestFunctions';
+import { getUserFromToken, loginIn, signUp, TokenData } from '../../services/requestFunctions';
 import { AuthenticationData } from '../../Commons/authData';
 import { LoginData } from '../../Commons/LoginData';
 import { useAuth } from './AuthContext';
@@ -47,10 +47,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
     }));
   };
 
-  const delayedLogin = (data: LoginData): Promise<string | null> => {
+  const delayedLogin = (data: LoginData): Promise<TokenData | null> => {
     return new Promise((resolve) => {
       setTimeout(async () => {
-        const token = await loginIn(data);
+        const token:TokenData|null = await loginIn(data);
         resolve(token);
       }, 2000);
     });
@@ -65,10 +65,11 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
         email:formData.email,
         password:formData.password
       }
-      const token:string|null = await delayedLogin(data);
-      if(token){
-        localStorage.setItem('token',token);
-        const user = await getUserFromToken({ token });
+      const token:TokenData|null = await delayedLogin(data);
+      console.log("Token :",token)
+      if(token && token.token){
+        localStorage.setItem('token',token.token);
+        const user = await getUserFromToken();
         setUser(user);
         setIsAuthenticated(true);
         // console.log("Authenticated? ",isAuthenticated);

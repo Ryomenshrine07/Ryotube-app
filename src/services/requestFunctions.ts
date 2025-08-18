@@ -14,10 +14,13 @@ export const signUp = async(data:AuthenticationData):Promise<UserData|null> =>{
         return null;
     }
 }
+export interface TokenData {
+    token: string;
+}
 
-export const loginIn = async(data: LoginData) :Promise<string|null> =>{
+export const loginIn = async(data: LoginData) :Promise<TokenData|null> =>{
     try{
-        const response = await myAxios.post<string>("/login",data);
+        const response = await myAxios.post<TokenData>("/login",data);
         return response.data;
     }catch(e){
         console.log(e);
@@ -25,9 +28,19 @@ export const loginIn = async(data: LoginData) :Promise<string|null> =>{
     }
 }
 
-export const getUserFromToken = async(token:{}):Promise<UserData|null> =>{
+export const getUserFromToken = async():Promise<UserData|null> =>{
     try{
-        const response = await myAxios.post<UserData>("/get-user",token);
+        const response = await myAxios.get<UserData>("/get-user");
+        return response.data;
+    }catch(e){
+        console.log(e);
+        return null;
+    }
+}
+
+export const getUserFromEmail = async(data:{}):Promise<UserData|null> =>{
+    try{
+        const response = await myAxios.post<UserData>("/get-user-by-email",data);
         return response.data;
     }catch(e){
         console.log(e);

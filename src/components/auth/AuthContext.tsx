@@ -1,7 +1,7 @@
 import { set } from 'date-fns';
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { UserData } from '../../Commons/userData';
-import { getUserFromToken } from '../../services/requestFunctions';
+import { getUserFromEmail, getUserFromToken } from '../../services/requestFunctions';
 
 interface User {
   id: string;
@@ -54,7 +54,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           const obj ={
             token:savedToken
           }
-          const userData:UserData|null = await getUserFromToken(obj);
+          const userDetails:UserData|null = await getUserFromToken();
+          const data = {
+            email:userDetails?.username
+          }
+
+          // console.log('USER DATA',userData?.username);
+          const userData:UserData|null = await getUserFromEmail(data);
+          console.log('userData',userData)
           if(userData)
           setToken(savedToken);
           setUser(userData);

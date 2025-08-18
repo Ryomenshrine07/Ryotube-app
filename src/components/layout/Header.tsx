@@ -38,6 +38,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
   };
 
   const handleSignOut = () => {
+    localStorage.removeItem("token");
     logout();
     setShowUserMenu(false);
     navigate('/login');

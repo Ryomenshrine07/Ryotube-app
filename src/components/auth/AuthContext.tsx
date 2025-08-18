@@ -51,17 +51,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         const savedToken = localStorage.getItem('token');
         if(savedToken){
-          const obj ={
-            token:savedToken
-          }
           const userDetails:UserData|null = await getUserFromToken();
           const data = {
             email:userDetails?.username
           }
-
-          // console.log('USER DATA',userData?.username);
           const userData:UserData|null = await getUserFromEmail(data);
-          console.log('userData',userData)
           if(userData)
           setToken(savedToken);
           setUser(userData);

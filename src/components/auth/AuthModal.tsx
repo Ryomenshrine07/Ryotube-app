@@ -66,7 +66,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
         password:formData.password
       }
       const token:TokenData|null = await delayedLogin(data);
-      console.log("Token :",token)
+      // console.log("Token :",token)
       if(token && token.token){
         localStorage.setItem('token',token.token);
         const user = await getUserFromToken();

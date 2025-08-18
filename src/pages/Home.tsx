@@ -5,10 +5,12 @@ import { mockVideos, categories } from '../data/mockData';
 import { cn } from '../utils/cn';
 import { getAllVideos } from '../services/requestFunctions';
 import { Video } from '../Commons/userData';
+import { useAuth } from '../components/auth/AuthContext';
 
 const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [videos, setVideos] = useState<Video[] | null>([]);
+
 
   useEffect(() => {
     // Simulate filtering videos by category

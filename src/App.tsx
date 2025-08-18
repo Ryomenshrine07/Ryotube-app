@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './components/auth/AuthContext';
+import { AuthProvider, useAuth } from './components/auth/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
@@ -20,8 +20,12 @@ import Upload from './pages/Upload';
 import ChannelPage from './pages/ChannelPage';
 
 function App() {
+  const {isAuthenticated} = useAuth();
+  useEffect( () => {
+
+  },[isAuthenticated])
   return (
-    <AuthProvider>
+    
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -48,7 +52,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </AuthProvider>
+
   );
 }
 

@@ -7,6 +7,7 @@ import { useAuth } from '../auth/AuthContext';
 import { getVideoChannelPic } from '../../services/requestFunctions';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import utc from 'dayjs/plugin/utc';
 
 
 interface VideoCardProps {
@@ -24,7 +25,10 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, index }) => {
       if(response){
         setVideoChannelPic(response);
         dayjs.extend(relativeTime);
-        const timeAgo = dayjs(video.uploadDateTime).fromNow();
+        dayjs.extend(utc);
+        console.log(video.uploadDateTime)
+        const timeAgo = dayjs.utc(video.uploadDateTime).local().fromNow();
+        console.log(timeAgo)
         setVideoDueration(timeAgo);
       }
     }

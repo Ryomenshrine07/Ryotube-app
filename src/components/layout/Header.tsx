@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen }) => {
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
-    sessionStorage.removeItem("reloaded");
+    sessionStorage.removeItem("reloaded"); 
     logout();
     setShowUserMenu(false);
     navigate('/login');

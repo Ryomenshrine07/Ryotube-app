@@ -15,6 +15,7 @@ import {
   Smartphone
 } from 'lucide-react';
 import { useAuth } from '../components/auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Settings: React.FC = () => {
   const [activeSection, setActiveSection] = useState('general');
@@ -26,6 +27,7 @@ const Settings: React.FC = () => {
     subscriptions: true,
     uploads: false,
   });
+  const navigate = useNavigate();
 
   const sections = [
     { id: 'general', label: 'General', icon: User },
@@ -149,6 +151,7 @@ const Settings: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => navigate("/watch-later")}
                     className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
                   >
                     Manage
@@ -162,6 +165,7 @@ const Settings: React.FC = () => {
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
+                    onClick={() => navigate("/history")}
                     whileTap={{ scale: 0.95 }}
                     className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
                   >

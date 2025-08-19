@@ -81,13 +81,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
         password:formData.password
       }
       // API call for signUp
-      const userData:UserData|null =  await signUp(data);
-      alert("Registered");
-    }else{
-
+      const userData:UserData|string =  await signUp(data);
+      if(typeof userData === "string" && userData === "Email already exists"){
+        alert("User alredy exists with this email")
+      }else if(typeof userData === "object"){
+        alert("Registered");
+      }
+      
     }
-
-    
     // console.log(`${mode} attempt:`, formData);
     setIsLoading(false);
     // onClose();

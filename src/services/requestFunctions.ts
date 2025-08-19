@@ -5,13 +5,13 @@ import { ChannelData, Comment, SubscriptionElement, UserData, Video } from '../C
 import { myAxios } from './myAxios';
 import { AxiosProgressEvent } from 'axios';
 
-export const signUp = async(data:AuthenticationData):Promise<UserData|null> =>{
+export const signUp = async(data:AuthenticationData):Promise<UserData|string> =>{
     try{
         const response = await myAxios.post<UserData>("/register",data);
         return response.data;
     }catch(e){
         console.log(e);
-        return null;
+        return "";
     }
 }
 export interface TokenData {

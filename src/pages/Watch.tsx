@@ -294,7 +294,7 @@ const Watch: React.FC = () => {
                     }`}
                   >
                     <ThumbsUp size={20} />
-                    <span className="text-sm hidden md:inline">{likeCount}</span>
+                    <span className="text-sm">{likeCount}</span>
                   </motion.button>
                   
                   <div className="w-px h-6 bg-gray-700" />
@@ -308,7 +308,7 @@ const Watch: React.FC = () => {
                     }`}
                   >
                     <ThumbsDown size={20} />
-                    <span className="text-sm hidden md:inline">{dislikeCount}</span>
+                    <span className="text-sm">{dislikeCount}</span>
                   </motion.button>
                 </div>
                 

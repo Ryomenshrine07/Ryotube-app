@@ -18,13 +18,13 @@ export interface TokenData {
     token: string;
 }
 
-export const loginIn = async(data: LoginData) :Promise<TokenData|null> =>{
+export const loginIn = async(data: LoginData) :Promise<TokenData|string> =>{
     try{
         const response = await myAxios.post<TokenData>("/login",data);
         return response.data;
     }catch(e){
         console.log(e);
-        return null;
+        return "";
     }
 }
 

@@ -14,6 +14,10 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     // Simulate filtering videos by category
+    if(!sessionStorage.getItem('reloaded')) {
+      sessionStorage.setItem('reloaded', 'true');
+      window.location.reload();
+    }
     if(selectedCategory === 'All') {
       const getData = async() =>{
         const response = await getAllVideos();

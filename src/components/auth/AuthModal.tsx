@@ -47,10 +47,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
     }));
   };
 
-  const delayedLogin = (data: LoginData): Promise<TokenData | null> => {
+  const delayedLogin = (data: LoginData): Promise<TokenData | string> => {
     return new Promise((resolve) => {
       setTimeout(async () => {
-        const token:TokenData|null = await loginIn(data);
+        const token:TokenData|string = await loginIn(data);
         resolve(token);
       }, 2000);
     });
@@ -65,14 +65,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
         email:formData.email,
         password:formData.password
       }
-      const token:TokenData|null = await delayedLogin(data);
+      const token:TokenData|string = await delayedLogin(data);
       // console.log("Token :",token)
-      if(token && token.token){
+      if(token && typeof token === "object" && token.token){
         localStorage.setItem('token',token.token);
         const user = await getUserFromToken();
         setUser(user);
         setIsAuthenticated(true);
         // console.log("Authenticated? ",isAuthenticated);
+      }else if(typeof token === "string" && token === "Incorrect Username Or Password"){
+        alert("Incorrect Username Or Password");
       }
     }else if(mode == 'signup'){
       const data:AuthenticationData = {
